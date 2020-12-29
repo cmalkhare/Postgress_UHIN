@@ -1,0 +1,7 @@
+--Get the native_message from newest clinical_message for single patient
+
+select native_message from clinical_message
+where clinical_message_key in (select max(clinical_message_key) from clinical_message
+where source_key =1042 and event_type = 'ADT^A31' and received_date > '2020-01-01 00:00:00.000'
+GROUP BY subject_key)
+                
